@@ -13,7 +13,7 @@ namespace PetCare_CasoEstudio2.Models.Citas
         [Key]
         public int IdCita { get; set; }
 
-        [ForeignKey("Mascotaa")]
+        [ForeignKey("Mascota")]
         [Required(ErrorMessage = "Debe seleccionar una mascota")]
         public int MascotaId { get; set; }
         public virtual Mascota Mascota { get; set; }

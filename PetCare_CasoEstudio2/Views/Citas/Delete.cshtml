@@ -1,0 +1,37 @@
+﻿@model PetCare_CasoEstudio2.Models.Citas.Cita
+
+@{
+    ViewBag.Title = "Eliminar Cita";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="text-danger">🗑️ Eliminar Cita</h2>
+    <h4 class="mb-4">¿Estás seguro de que deseas eliminar esta cita?</h4>
+
+    <dl class="row">
+        <dt class="col-sm-3 fw-bold">Mascota</dt>
+        <dd class="col-sm-9">@(Model.Mascota?.NombreMascota)</dd>
+
+        <dt class="col-sm-3 fw-bold">Veterinario</dt>
+        <dd class="col-sm-9">@(Model.Usuario?.NombreCompleto)</dd>
+
+        <dt class="col-sm-3 fw-bold">Fecha y Hora</dt>
+        <dd class="col-sm-9">@Model.FechaCita.ToString("dd/MM/yyyy HH:mm")</dd>
+
+        <dt class="col-sm-3 fw-bold">Motivo de Consulta</dt>
+        <dd class="col-sm-9">@Model.MotivoConsulta</dd>
+
+        <dt class="col-sm-3 fw-bold">Estado</dt>
+        <dd class="col-sm-9">@Model.EstadoCita</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="d-flex justify-content-between mt-4">
+            <input type="submit" value="✅ Confirmar Eliminación" class="btn btn-danger" />
+            @Html.ActionLink("⬅️ Cancelar", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>

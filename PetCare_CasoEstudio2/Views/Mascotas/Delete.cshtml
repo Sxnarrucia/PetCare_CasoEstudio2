@@ -1,0 +1,46 @@
+﻿@model PetCare_CasoEstudio2.Models.Mascotas.Mascota
+
+@{
+    ViewBag.Title = "Eliminar Mascota";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="text-danger">🗑️ Eliminar Mascota</h2>
+    <h4 class="mb-4">¿Estás seguro que deseas eliminar esta mascota?</h4>
+
+    <dl class="row">
+        <dt class="col-sm-3 fw-bold">Propietario</dt>
+        <dd class="col-sm-9">@(Model.Usuario?.NombreCompleto)</dd>
+
+        <dt class="col-sm-3 fw-bold">Nombre</dt>
+        <dd class="col-sm-9">@Model.NombreMascota</dd>
+
+        <dt class="col-sm-3 fw-bold">Especie</dt>
+        <dd class="col-sm-9">@Model.EspecieMascota</dd>
+
+        <dt class="col-sm-3 fw-bold">Raza</dt>
+        <dd class="col-sm-9">@Model.RazaMascota</dd>
+
+        <dt class="col-sm-3 fw-bold">Edad</dt>
+        <dd class="col-sm-9">@Model.EdadMascota años</dd>
+
+        <dt class="col-sm-3 fw-bold">Peso</dt>
+        <dd class="col-sm-9">@Model.PesoMascota kg</dd>
+
+        <dt class="col-sm-3 fw-bold">Fecha de Registro</dt>
+        <dd class="col-sm-9">@Model.FechaRegistro.ToString("dd/MM/yyyy HH:mm")</dd>
+
+        <dt class="col-sm-3 fw-bold">Registrado por</dt>
+        <dd class="col-sm-9">@Model.UsuarioDeRegistro</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="d-flex justify-content-between mt-4">
+            <input type="submit" value="✅ Confirmar Eliminación" class="btn btn-danger" />
+            @Html.ActionLink("⬅️ Cancelar y volver", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>

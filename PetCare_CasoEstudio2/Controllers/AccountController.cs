@@ -73,23 +73,23 @@ namespace PetCare_CasoEstudio2.Controllers
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            // Buscar al usuario por Email
+            var user = await UserManager.FindByEmailAsync(model.Email);
+            if (user != null)
             {
-                case SignInStatus.Success:
+                // Verificar contraseña
+                if (await UserManager.CheckPasswordAsync(user, model.Password))
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: model.RememberMe, rememberBrowser: false);
                     return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                }
             }
+
+            // Si llega aquí es porque falló el login
+            ModelState.AddModelError("", "Intento de inicio de sesión no válido.");
+            return View(model);
         }
+
 
         //
         // GET: /Account/VerifyCode
@@ -151,26 +151,28 @@ namespace PetCare_CasoEstudio2.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    NombreCompleto = model.NombreCompleto,
+                    PhoneNumber = model.PhoneNumber,
+                    Rol = "Cliente"
+                };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    await UserManager.AddToRoleAsync(user.Id, "Cliente"); // ✅ Rol asignado
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
+
 
         //
         // GET: /Account/ConfirmEmail

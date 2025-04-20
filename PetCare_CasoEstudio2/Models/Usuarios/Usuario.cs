@@ -1,17 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace PetCare_CasoEstudio2.Models.Usuario
 {
-    public class Usuario
+    public class ApplicationUser : IdentityUser
     {
-        public string Id { get; set; }
-        public string NombreUsuario { get; set; }
-        public string Nombre { get; set; }
-        public string Email { get; set; }
-        public string Telefono { get; set; }
+        public string NombreCompleto { get; set; }
         public string Rol { get; set; }
     }
+
 }

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 using PetCare_CasoEstudio2.Models.Citas;
 
 namespace PetCare_CasoEstudio2.Models.Historial
@@ -13,23 +10,25 @@ namespace PetCare_CasoEstudio2.Models.Historial
         [Key]
         public int IdHistorial { get; set; }
 
-        [ForeignKey("Cita")]
         [Required(ErrorMessage = "Debe seleccionar una cita")]
+        [ForeignKey("Cita")]
         public int CitaID { get; set; }
         public virtual Cita Cita { get; set; }
 
-        [Required(ErrorMessage = "El diagnostico es obligatorio")]
-        [Display(Name = "Diagnostico")]
-        [StringLength(100)]
+        [Required(ErrorMessage = "El diagnóstico es obligatorio")]
+        [StringLength(200)]
         public string Diagnostico { get; set; }
 
         [Required(ErrorMessage = "El tratamiento es obligatorio")]
-        [Display(Name = "Tratamiento")]
-        [StringLength(100)]
+        [StringLength(200)]
         public string Tratamiento { get; set; }
 
-        [Display(Name = "Observaciones Adicionales")]
-        [StringLength(100)]
+        [StringLength(300)]
+        [Display(Name = "Observaciones adicionales")]
         public string Observaciones { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Fecha de seguimiento (opcional)")]
+        public DateTime? FechaSeguimiento { get; set; } 
     }
 }

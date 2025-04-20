@@ -1,0 +1,34 @@
+﻿@model PetCare_CasoEstudio2.Models.Historial.Historial
+
+@{
+    ViewBag.Title = "Eliminar Historial Médico";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="text-danger">🗑️ Eliminar Historial Médico</h2>
+    <h4 class="mb-4">¿Estás seguro de que deseas eliminar este historial?</h4>
+
+    <dl class="row">
+        <dt class="col-sm-3 fw-bold">Veterinario</dt>
+        <dd class="col-sm-9">@(Model.Cita?.Usuario?.NombreCompleto)</dd>
+
+        <dt class="col-sm-3 fw-bold">Diagnóstico</dt>
+        <dd class="col-sm-9">@Model.Diagnostico</dd>
+
+        <dt class="col-sm-3 fw-bold">Tratamiento</dt>
+        <dd class="col-sm-9">@Model.Tratamiento</dd>
+
+        <dt class="col-sm-3 fw-bold">Observaciones</dt>
+        <dd class="col-sm-9">@Model.Observaciones</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="d-flex justify-content-between mt-4">
+            <input type="submit" value="✅ Confirmar Eliminación" class="btn btn-danger" />
+            @Html.ActionLink("⬅️ Cancelar", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>

@@ -1,0 +1,47 @@
+﻿@model PetCare_CasoEstudio2.Models.Historial.Historial
+
+@{
+    ViewBag.Title = "Editar Historial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="text-primary">✏️ Editar Historial Médico</h2>
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.IdHistorial)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.CitaID, "Cita Relacionada", htmlAttributes: new { @class = "form-label fw-bold" })
+            @Html.DropDownList("CitaID", null, "Seleccione una cita", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CitaID, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Diagnostico, htmlAttributes: new { @class = "form-label fw-bold" })
+            @Html.EditorFor(model => model.Diagnostico, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Diagnostico, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Tratamiento, htmlAttributes: new { @class = "form-label fw-bold" })
+            @Html.EditorFor(model => model.Tratamiento, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Tratamiento, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.Observaciones, htmlAttributes: new { @class = "form-label fw-bold" })
+            @Html.EditorFor(model => model.Observaciones, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Observaciones, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <input type="submit" value="💾 Guardar Cambios" class="btn btn-success" />
+            @Html.ActionLink("⬅️ Cancelar", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>

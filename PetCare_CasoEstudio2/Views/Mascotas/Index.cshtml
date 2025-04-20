@@ -1,0 +1,39 @@
+﻿@model IEnumerable<PetCare_CasoEstudio2.Models.Mascotas.Mascota>
+
+@{
+    ViewBag.Title = "Lista de Mascotas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-primary">🐾 Lista de Mascotas</h2>
+        @Html.ActionLink("➕ Registrar Nueva Mascota", "Create", null, new { @class = "btn btn-success" })
+    </div>
+
+    <table class="table table-bordered table-hover shadow-sm rounded">
+        <thead class="thead-dark">
+            <tr class="bg-primary text-white">
+                <th>Nombre</th>
+                <th>Especie</th>
+                <th>Propietario</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.NombreMascota</td>
+                    <td>@item.EspecieMascota</td>
+                    <td>@(item.Usuario?.NombreCompleto)</td>
+                    <td class="text-center">
+                        @Html.ActionLink("✏️ Editar", "Edit", new { id = item.IdMascota }, new { @class = "btn btn-sm btn-warning me-1" })
+                        @Html.ActionLink("🔍 Detalles", "Details", new { id = item.IdMascota }, new { @class = "btn btn-sm btn-info me-1" })
+                        @Html.ActionLink("🗑️ Eliminar", "Delete", new { id = item.IdMascota }, new { @class = "btn btn-sm btn-danger" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

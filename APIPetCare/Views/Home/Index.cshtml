@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Inicio - API Pública PetCare";
+}
+
+<main class="container mt-4">
+    <section class="text-center">
+        <h1 class="display-4">API Pública PetCare 🐾</h1>
+        <p class="lead">Esta API está diseñada para facilitar el acceso a la información de mascotas y citas del sistema PetCare, de forma segura y eficiente mediante JWT.</p>
+    </section>
+
+    <hr />
+
+    <div class="row text-center">
+        <section class="col-md-6">
+            <h3>🔐 Autenticación JWT</h3>
+            <p>Todos los endpoints están protegidos mediante tokens JWT. Debés iniciar sesión primero para obtener tu token y luego usarlo en el encabezado <code>Authorization</code> con el esquema <code>Bearer</code>.</p>
+        </section>
+        <section class="col-md-6">
+            <h3>📋 Endpoints Disponibles</h3>
+            <ul class="list-unstyled">
+                <li><strong>GET</strong> /api/pets/{petId}/medical-history</li>
+                <li><strong>GET</strong> /api/appointments/client/{clientId}</li>
+            </ul>
+            <p>Permiten consultar el historial médico de una mascota y las citas pendientes por mascota.</p>
+        </section>
+    </div>
+
+    <div class="text-center mt-5">
+        <a class="btn btn-success btn-lg" href="/swagger/ui/index" target="_blank">
+            Ir a la documentación Swagger →
+        </a>
+    </div>
+</main>

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<PetCare_CasoEstudio2.Models.Citas.Cita>
+
+@{
+    ViewBag.Title = "Listado de Citas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="text-primary">📅 Listado de Citas</h2>
+
+    <div class="mb-3">
+        @Html.ActionLink("➕ Registrar Nueva Cita", "Create", null, new { @class = "btn btn-success" })
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>Mascota</th>
+                <th>Veterinario</th>
+                <th>Fecha y Hora</th>
+                <th>Motivo</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(item.Mascota?.NombreMascota)</td>
+                    <td>@(item.Usuario?.NombreCompleto)</td>
+                    <td>@item.FechaCita.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@item.MotivoConsulta</td>
+                    <td>@item.EstadoCita</td>
+                    <td>
+                        <div class="btn-group btn-group-sm" role="group">
+                            @Html.ActionLink("✏️ Editar", "Edit", new { id = item.IdCita }, new { @class = "btn btn-warning" })
+                            @Html.ActionLink("🔍 Detalles", "Details", new { id = item.IdCita }, new { @class = "btn btn-info" })
+                            @Html.ActionLink("🗑️ Eliminar", "Delete", new { id = item.IdCita }, new { @class = "btn btn-danger" })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

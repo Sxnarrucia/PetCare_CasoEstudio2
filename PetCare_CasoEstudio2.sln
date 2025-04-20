@@ -4,6 +4,8 @@ VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetCare_CasoEstudio2", "PetCare_CasoEstudio2\PetCare_CasoEstudio2.csproj", "{7EEF1191-67A2-415B-A438-DE7DD7C48B29}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIPetCare", "APIPetCare\APIPetCare.csproj", "{E88E826D-32FF-40F8-8162-228F23F268F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,6 +16,10 @@ Global
 		{7EEF1191-67A2-415B-A438-DE7DD7C48B29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EEF1191-67A2-415B-A438-DE7DD7C48B29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EEF1191-67A2-415B-A438-DE7DD7C48B29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E88E826D-32FF-40F8-8162-228F23F268F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E88E826D-32FF-40F8-8162-228F23F268F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E88E826D-32FF-40F8-8162-228F23F268F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E88E826D-32FF-40F8-8162-228F23F268F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

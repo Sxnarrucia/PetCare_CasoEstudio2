@@ -1,0 +1,33 @@
+﻿@model PetCare_CasoEstudio2.Models.Citas.Cita
+
+@{
+    ViewBag.Title = "Detalles de la Cita";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="text-primary">🔍 Detalles de la Cita</h2>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-3 fw-bold">Mascota</dt>
+        <dd class="col-sm-9">@(Model.Mascota?.NombreMascota)</dd>
+
+        <dt class="col-sm-3 fw-bold">Veterinario</dt>
+        <dd class="col-sm-9">@(Model.Usuario?.NombreCompleto)</dd>
+
+        <dt class="col-sm-3 fw-bold">Fecha y Hora</dt>
+        <dd class="col-sm-9">@Model.FechaCita.ToString("dd/MM/yyyy HH:mm")</dd>
+
+        <dt class="col-sm-3 fw-bold">Motivo de Consulta</dt>
+        <dd class="col-sm-9">@Model.MotivoConsulta</dd>
+
+        <dt class="col-sm-3 fw-bold">Estado</dt>
+        <dd class="col-sm-9">@Model.EstadoCita</dd>
+    </dl>
+
+    <div class="d-flex justify-content-between mt-4">
+        @Html.ActionLink("✏️ Editar", "Edit", new { id = Model.IdCita }, new { @class = "btn btn-warning" })
+        @Html.ActionLink("⬅️ Volver a la lista", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
+</div>

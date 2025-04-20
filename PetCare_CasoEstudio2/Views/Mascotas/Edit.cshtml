@@ -1,0 +1,70 @@
+﻿@model PetCare_CasoEstudio2.Models.Mascotas.Mascota
+
+@{
+    ViewBag.Title = "Editar Mascota";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="text-primary">✏️ Editar Mascota</h2>
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.IdMascota)
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.NombreMascota, htmlAttributes: new { @class = "form-label fw-bold" })
+            @Html.EditorFor(model => model.NombreMascota, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NombreMascota, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.EspecieMascota, htmlAttributes: new { @class = "form-label fw-bold" })
+            @Html.EditorFor(model => model.EspecieMascota, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.EspecieMascota, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.RazaMascota, htmlAttributes: new { @class = "form-label fw-bold" })
+            @Html.EditorFor(model => model.RazaMascota, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.RazaMascota, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.EdadMascota, htmlAttributes: new { @class = "form-label fw-bold" })
+            @Html.EditorFor(model => model.EdadMascota, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.EdadMascota, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.PesoMascota, htmlAttributes: new { @class = "form-label fw-bold" })
+            @Html.EditorFor(model => model.PesoMascota, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PesoMascota, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.UsuarioId, "Propietario", htmlAttributes: new { @class = "form-label fw-bold" })
+            @Html.DropDownList("UsuarioId", null, "Seleccione un propietario", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.UsuarioId, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.FechaRegistro, htmlAttributes: new { @class = "form-label fw-bold" })
+            @Html.EditorFor(model => model.FechaRegistro, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.FechaRegistro, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.UsuarioDeRegistro, htmlAttributes: new { @class = "form-label fw-bold" })
+            @Html.EditorFor(model => model.UsuarioDeRegistro, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.UsuarioDeRegistro, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <input type="submit" value="💾 Guardar cambios" class="btn btn-success" />
+            @Html.ActionLink("⬅️ Volver a la lista", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>

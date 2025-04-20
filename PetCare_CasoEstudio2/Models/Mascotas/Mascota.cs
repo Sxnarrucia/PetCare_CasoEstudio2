@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace PetCare_CasoEstudio2.Models.Mascotas
 {
@@ -14,31 +11,40 @@ namespace PetCare_CasoEstudio2.Models.Mascotas
 
         [Required(ErrorMessage = "El nombre de la mascota es obligatorio")]
         [StringLength(100)]
+        [Display(Name = "Nombre")]
         public string NombreMascota { get; set; }
 
-        [Required(ErrorMessage = "La especie de la mascota es obligatorio")]
-        [StringLength(100)]
-        public string EspecieMascota { get; set; }
+        [Required(ErrorMessage = "La especie es obligatoria")]
+        [StringLength(50)]
+        [Display(Name = "Especie")]
+        public string EspecieMascota { get; set; } // perro, gato, ave, reptil, otro
 
-        [Required(ErrorMessage = "La raza de la mascota es obligatorio")]
+        [Required(ErrorMessage = "La raza es obligatoria")]
         [StringLength(100)]
+        [Display(Name = "Raza")]
         public string RazaMascota { get; set; }
 
-        [Required(ErrorMessage = "La edad de la mascota es obligatorio")]
+        [Required(ErrorMessage = "La edad es obligatoria")]
+        [Display(Name = "Edad (en años)")]
         public int EdadMascota { get; set; }
 
-        [Required(ErrorMessage = "El peso de la mascota es obligatorio")]
+        [Required(ErrorMessage = "El peso es obligatorio")]
+        [Display(Name = "Peso (en kg)")]
         public double PesoMascota { get; set; }
 
+        // Relación con el propietario
+        [Required]
         [ForeignKey("Usuario")]
-        public string UsuarioId { get; set; }  // 🔄 string, no int
+        [Display(Name = "Propietario")]
+        public string UsuarioId { get; set; }
 
-        public virtual ApplicationUser Usuario { get; set; }  // 👈 relacionado con Identity
+        public virtual ApplicationUser Usuario { get; set; }
 
         [DataType(DataType.DateTime)]
+        [Display(Name = "Fecha de Registro")]
         public DateTime FechaRegistro { get; set; }
 
+        [Display(Name = "Usuario que Registró")]
         public string UsuarioDeRegistro { get; set; }
-
     }
 }

@@ -1,89 +1,93 @@
 ﻿@model PetCare_CasoEstudio2.Models.IndexViewModel
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Perfil de Usuario";
 }
 
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
+<style>
+    .perfil-container {
+        max-width: 800px;
+        margin: auto;
+        margin-top: 30px;
+    }
 
-    <p class="text-success">@ViewBag.StatusMessage</p>
-    <div>
-        <h4>Change your account settings</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>Password:</dt>
-            <dd>
-                [
+    .perfil-card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.05);
+        background: #ffffff;
+        padding: 30px;
+    }
+
+        .perfil-card h2 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+    .perfil-datos dt {
+        font-weight: 600;
+        color: #555;
+    }
+
+    .perfil-datos dd {
+        margin-bottom: 20px;
+        color: #222;
+    }
+
+    .btn-link {
+        padding-left: 0;
+        font-weight: 500;
+    }
+
+    .badge-rol {
+        font-size: 0.95rem;
+        padding: 5px 10px;
+        border-radius: 20px;
+        background: #e9ecef;
+        color: #333;
+    }
+</style>
+
+<div class="perfil-container">
+    <div class="perfil-card">
+        <h2>Mi Perfil</h2>
+
+        @if (!String.IsNullOrEmpty(ViewBag.StatusMessage))
+        {
+            <div class="alert alert-success">@ViewBag.StatusMessage</div>
+        }
+
+        <dl class="row perfil-datos">
+            <dt class="col-sm-4">Nombre de Usuario:</dt>
+            <dd class="col-sm-8">@User.Identity.Name</dd>
+
+            <dt class="col-sm-4">Correo Electrónico:</dt>
+            <dd class="col-sm-8">@Model.Email</dd>
+
+            <dt class="col-sm-4">Teléfono:</dt>
+            <dd class="col-sm-8">@Model.PhoneNumber</dd>
+
+            <dt class="col-sm-4">Rol:</dt>
+            <dd class="col-sm-8">
+                <span class="badge badge-rol">@Model.Rol</span>
+            </dd>
+
+            <dt class="col-sm-4">Contraseña:</dt>
+            <dd class="col-sm-8">
                 @if (Model.HasPassword)
                 {
-                    @Html.ActionLink("Change your password", "ChangePassword")
+                    @Html.ActionLink("Cambiar contraseña", "ChangePassword", null, new { @class = "btn btn-sm btn-outline-primary" })
                 }
                 else
                 {
-                    @Html.ActionLink("Create", "SetPassword")
+                    @Html.ActionLink("Crear contraseña", "SetPassword", null, new { @class = "btn btn-sm btn-outline-secondary" })
                 }
-                ]
-            </dd>
-            <dt>External Logins:</dt>
-            <dd>
-                @Model.Logins.Count [
-                @Html.ActionLink("Manage", "ManageLogins") ]
-            </dd>
-            @*
-                Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-                
-                See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                    for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-                
-                Uncomment the following block after you have set up two-factor authentication
-            *@
-            @*  
-                <dt>Phone Number:</dt>
-                <dd>
-                    @(Model.PhoneNumber ?? "None")
-                    @if (Model.PhoneNumber != null)
-                    {
-                        <br />
-                        <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                        using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
-                        }
-                    }
-                    else
-                    {
-                        <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
-                    }
-                </dd>
-            *@
-            <dt>Two-Factor Authentication:</dt>
-            <dd>
-                <p>
-                    There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                    for details on setting up this ASP.NET application to support two-factor authentication.
-                </p>
-                @*@if (Model.TwoFactor)
-                    {
-                        using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <text>Enabled
-                            <input type="submit" value="Disable" class="btn btn-link" />
-                            </text>
-                        }
-                    }
-                    else
-                    {
-                        using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <text>Disabled
-                            <input type="submit" value="Enable" class="btn btn-link" />
-                            </text>
-                        }
-                    }*@
             </dd>
         </dl>
     </div>
-</main>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

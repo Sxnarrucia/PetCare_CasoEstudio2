@@ -1,0 +1,52 @@
+﻿@model PetCare_CasoEstudio2.Models.EditUserViewModel
+
+@{
+    ViewBag.Title = "Editar Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">✏️ Editar Usuario</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Id)
+
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.UserName, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.NombreCompleto, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.NombreCompleto, new { @class = "form-control" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.Email, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.PhoneNumber, htmlAttributes: new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                </div>
+
+                <div class="mb-4">
+                    @Html.LabelFor(m => m.Rol, htmlAttributes: new { @class = "form-label" })
+                    @Html.DropDownListFor(m => m.Rol, (SelectList)ViewBag.Roles, new { @class = "form-control" })
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <input type="submit" value="💾 Guardar Cambios" class="btn btn-primary" />
+                    @Html.ActionLink("🔙 Volver a la lista", "Index", null, new { @class = "btn btn-secondary" })
+                </div>
+            </div>
+        </div>
+    }
+</div>

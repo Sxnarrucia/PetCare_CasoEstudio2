@@ -1,0 +1,30 @@
+﻿@model PetCare_CasoEstudio2.Models.Historial.Historial
+
+@{
+    ViewBag.Title = "Detalles del Historial Médico";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="text-primary">🔍 Detalles del Historial Médico</h2>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-3 fw-bold">Veterinario</dt>
+        <dd class="col-sm-9">@(Model.Cita?.Usuario?.NombreCompleto)</dd>
+      
+        <dt class="col-sm-3 fw-bold">Diagnóstico</dt>
+        <dd class="col-sm-9">@Model.Diagnostico</dd>
+
+        <dt class="col-sm-3 fw-bold">Tratamiento</dt>
+        <dd class="col-sm-9">@Model.Tratamiento</dd>
+
+        <dt class="col-sm-3 fw-bold">Observaciones</dt>
+        <dd class="col-sm-9">@Model.Observaciones</dd>
+    </dl>
+
+    <div class="d-flex justify-content-between mt-4">
+        @Html.ActionLink("✏️ Editar", "Edit", new { id = Model.IdHistorial }, new { @class = "btn btn-warning" })
+        @Html.ActionLink("⬅️ Volver a la lista", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
+</div>
